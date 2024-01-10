@@ -1,4 +1,4 @@
-APP_NAME := go-app
+APP_NAME := quickstart-go-app
 PORT := 8080
 
 BUILD_DIR := $(CURDIR)/build
