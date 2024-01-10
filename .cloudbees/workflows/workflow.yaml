@@ -16,7 +16,8 @@ jobs:
       - name: Build Go App
         uses: docker://golang:1.21
         run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o build/go-app .
+          mkdir -p build
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o build/quickstart-go-app .
 
       - name: Setup Dockerhub container registry
         uses: cloudbees-io/configure-oci-credentials@v1
