@@ -18,15 +18,15 @@ jobs:
         run: |
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o build/go-app .
 
-      # - name: Setup Dockerhub container registry
-      #   uses: cloudbees-io/configure-oci-credentials@v1
-      #   with:
-      #     registry: index.docker.io # or docker.io
-      #     username: ${{ vars.DOCKERHUB_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Setup Dockerhub container registry
+        uses: cloudbees-io/configure-oci-credentials@v1
+        with:
+          registry: index.docker.io # or docker.io
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      # - name: Push image to the configured OCI Registry
-      #   uses: cloudbees-io/kaniko@v1
-      #   with:
-      #     destination: ${{ vars.DOCKERHUB_USERNAME }}/quickstart-java-app:${{ cloudbees.version }}
+      - name: Push image to the configured OCI Registry
+        uses: cloudbees-io/kaniko@v1
+        with:
+          destination: ${{ vars.DOCKERHUB_USERNAME }}/quickstart-go-app:${{ cloudbees.version }}
   
