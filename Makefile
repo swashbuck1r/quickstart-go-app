@@ -36,7 +36,7 @@ docker-build: ## Build the container
 
 .PHONY: docker-run
 docker-run: ## Run the container
-	docker run -i -t --rm -p=$(PORT):$(PORT) --name="$(APP_NAME)" -e CHOKIDAR_USEPOLLING=true $(APP_NAME)
+	docker run -i -t --rm -p=$(PORT):$(PORT) --name="$(APP_NAME)" $(APP_NAME)
 
 .PHONY: shell
 shell:
