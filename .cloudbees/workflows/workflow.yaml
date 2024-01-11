@@ -10,7 +10,7 @@ on:
 jobs:
   build-and-publsh:
     steps:
-      - name: checkout code
+      - name: Checkout
         uses: cloudbees-io/checkout@v1
 
       - name: Build Go App
@@ -19,14 +19,14 @@ jobs:
           mkdir -p build
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o build/quickstart-go-app .
 
-      - name: Setup Dockerhub container registry
+      - name: Configure container registry
         uses: cloudbees-io/configure-oci-credentials@v1
         with:
           registry: index.docker.io # or docker.io
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Push image to the configured OCI Registry
+      - name: Build and publish container image
         uses: cloudbees-io/kaniko@v1
         with:
           destination: ${{ vars.DOCKERHUB_USERNAME }}/quickstart-go-app:${{ cloudbees.version }}
