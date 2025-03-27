@@ -7,7 +7,7 @@ on:
       - "**"
   workflow_dispatch:
 jobs:
-  build-and-publsh:
+  build-and-pubilsh:
     steps:
       - name: Checkout
         uses: cloudbees-io/checkout@v1
@@ -28,7 +28,7 @@ jobs:
           destination: ${{ vars.DOCKERHUB_USERNAME }}/quickstart-go-app:${{ cloudbees.version }}
   deploy:
     needs:
-      - build-and-publsh
+      - build-and-pubilsh
     steps:
       - uses: cloudbees-io/configure-aws-credentials@v1
         with:
@@ -45,7 +45,7 @@ jobs:
         name: Install helm chart
         uses: cloudbees-io/helm-install
         with:
-          chart-location: ${{ needs.build.outputs.chart-location }}
-          version: ${{ needs.build.outputs.chart-version }}
+          chart-location: ${{ needs.build-and-pubilsh.outputs.chart-location }}
+          version: ${{ needs.build-and-pubilsh.outputs.chart-version }}
           release-name: app-chart
           namespace: quickstart-go-app
