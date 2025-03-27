@@ -22,7 +22,7 @@ jobs:
 
       - name: Wait for port
         timeout-minutes: 1
-        uses: docker://chainguard/netcat:latest
+        uses: docker://cgr.dev/chainguard/netcat:latest
         run: until nc -w 10 127.0.0.1 3306; do sleep 1; done
 
       - name: Build Go App
