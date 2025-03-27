@@ -20,6 +20,11 @@ jobs:
       - name: Checkout
         uses: cloudbees-io/checkout@v1
 
+      - name: Wait for port
+        timeout-minutes: 1
+        uses: docker://golang:1.21
+        run: until nc -w 10 127.0.0.1 3000; do sleep 1; done
+
       - name: Build Go App
         uses: docker://golang:1.21
         run: |
